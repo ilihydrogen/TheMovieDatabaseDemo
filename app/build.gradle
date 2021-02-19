@@ -77,4 +77,7 @@ dependencies {
     implementation "com.xwray:groupie-kotlin-android-extensions:$rootProject.groupieVersion"
 
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    // CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

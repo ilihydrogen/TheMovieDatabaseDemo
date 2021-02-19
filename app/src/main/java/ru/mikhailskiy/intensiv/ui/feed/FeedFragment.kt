@@ -15,7 +15,7 @@ import ru.mikhailskiy.intensiv.BuildConfig
 import ru.mikhailskiy.intensiv.R
 import ru.mikhailskiy.intensiv.data.MockRepository
 import ru.mikhailskiy.intensiv.data.Movie
-import ru.mikhailskiy.intensiv.ui.afterTextChanged
+import ru.mikhailskiy.intensiv.extensions.afterTextChanged
 import timber.log.Timber
 
 class FeedFragment : Fragment() {
