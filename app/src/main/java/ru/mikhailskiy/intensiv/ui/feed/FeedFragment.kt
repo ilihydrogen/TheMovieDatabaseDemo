@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.feed_fragment.*
@@ -13,9 +14,10 @@ import kotlinx.android.synthetic.main.feed_header.*
 import kotlinx.android.synthetic.main.search_toolbar.view.*
 import ru.mikhailskiy.intensiv.BuildConfig
 import ru.mikhailskiy.intensiv.R
-import ru.mikhailskiy.intensiv.data.MockRepository
 import ru.mikhailskiy.intensiv.data.Movie
-import ru.mikhailskiy.intensiv.ui.afterTextChanged
+import ru.mikhailskiy.intensiv.data.repository.MovieRepository
+import ru.mikhailskiy.intensiv.extensions.afterTextChanged
+import ru.mikhailskiy.intensiv.extensions.toast
 import timber.log.Timber
 
 class FeedFragment : Fragment() {
@@ -47,37 +49,45 @@ class FeedFragment : Fragment() {
             }
         }
 
-        // Используя Мок-репозиторий получаем фэйковый список фильмов
-        val moviesList = listOf(
-            MainCardContainer(
-                R.string.recommended,
-                MockRepository.getMovies().map {
-                    MovieItem(it) { movie ->
-                        openMovieDetails(
-                            movie
-                        )
-                    }
-                }.toList()
-            )
+        loadMovies()
+    }
+
+    private fun loadMovies() {
+        adapter.apply { clear() }
+
+        MovieRepository.nowPlaying(
+            onResult = { _, movies ->
+                adapter.apply {
+                    val newMovies = movies.map {
+                        MovieItem(it) { movie ->
+                            openMovieDetails(
+                                movie
+                            )
+                        }
+                    }.toList()
+
+                    add(MainCardContainer(R.string.upcoming, newMovies))
+                }
+            },
+            onError = { context?.toast(it) }
         )
 
-        movies_recycler_view.adapter = adapter.apply { addAll(moviesList) }
+        MovieRepository.popular(
+            onResult = { _, movies ->
+                adapter.apply {
+                    val newMovies = movies.map {
+                        MovieItem(it) { movie ->
+                            openMovieDetails(
+                                movie
+                            )
+                        }
+                    }.toList()
 
-        // Используя Мок-репозиторий получаем фэйковый список фильмов
-        // Чтобы отобразить второй ряд фильмов
-        val newMoviesList = listOf(
-            MainCardContainer(
-                R.string.upcoming,
-                MockRepository.getMovies().map {
-                    MovieItem(it) { movie ->
-                        openMovieDetails(movie)
-                    }
-                }.toList()
-            )
+                    add(MainCardContainer(R.string.popular, newMovies))
+                }
+            },
+            onError = { context?.toast(it) }
         )
-
-        adapter.apply { addAll(newMoviesList) }
-
     }
 
     private fun openMovieDetails(movie: Movie) {
@@ -91,7 +101,7 @@ class FeedFragment : Fragment() {
         }
 
         val bundle = Bundle()
-        bundle.putString("title", movie.title)
+        bundle.putString("movie", Gson().toJson(movie))
         findNavController().navigate(R.id.movie_details_fragment, bundle, options)
     }
 
