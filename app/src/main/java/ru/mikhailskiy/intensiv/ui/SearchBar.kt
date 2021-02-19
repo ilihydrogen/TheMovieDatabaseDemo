@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.search_toolbar.view.*
 import ru.mikhailskiy.intensiv.R
+import ru.mikhailskiy.intensiv.extensions.afterTextChanged
 
 class SearchBar @JvmOverloads constructor(
     context: Context,

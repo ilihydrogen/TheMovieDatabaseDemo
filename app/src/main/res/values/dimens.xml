@@ -15,6 +15,10 @@
     <dimen name="movie_card_text_width">96dp</dimen>
     <dimen name="close_width">20dp</dimen>
 
+    <!--    TV show item-->
+    <dimen name="tv_show_card_width">380dp</dimen>
+    <dimen name="tv_show_card_height">160dp</dimen>
+    <dimen name="tv_show_card_text_width">196dp</dimen>
 
 
 </resources>
