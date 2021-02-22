@@ -6,13 +6,14 @@ import kotlinx.android.synthetic.main.tv_show_item.*
 import ru.mikhailskiy.intensiv.R
 import ru.mikhailskiy.intensiv.data.Movie
 import ru.mikhailskiy.intensiv.extensions.loadByUrl
+import ru.mikhailskiy.intensiv.network.ImageUtils
 
 class TVShowItem(private val content: Movie) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.tv_show_title.text = content.title
         viewHolder.tv_show_rating.rating = content.rating
-        viewHolder.tv_show_image.loadByUrl("https://m.media-amazon.com/images/M/MV5BYTk3MDljOWQtNGI2My00OTEzLTlhYjQtOTQ4ODM2MzUwY2IwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_.jpg")
+        viewHolder.tv_show_image.loadByUrl(ImageUtils.imageUrl(content.posterPath))
     }
 
     override fun getLayout(): Int {

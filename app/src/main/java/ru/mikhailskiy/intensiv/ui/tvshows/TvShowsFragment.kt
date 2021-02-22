@@ -10,7 +10,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.tv_shows_fragment.*
 import ru.mikhailskiy.intensiv.R
-import ru.mikhailskiy.intensiv.data.MockRepository
+import ru.mikhailskiy.intensiv.data.repository.MovieRepository
+import ru.mikhailskiy.intensiv.extensions.toast
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -42,12 +43,24 @@ class TvShowsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tv_shows_rv.adapter = adapter.apply {
-            addAll(MockRepository.getTVShows().map {
-                TVShowItem(it)
-            }.toList())
-        }
+//        tv_shows_rv.adapter = adapter.apply {
+//            addAll(MockRepository.getTVShows().map {
+//                TVShowItem(it)
+//            }.toList())
+//        }
+
+        loadTvShows()
         tv_shows_rv.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun loadTvShows() {
+        MovieRepository.popularTvShows(
+            onResult = { _, result ->
+                tv_shows_rv.adapter = adapter.apply {
+                    addAll(result.map { TVShowItem(it) }.toList())
+                }
+            }, onError = { context?.toast(it) }
+        )
     }
 
     companion object {

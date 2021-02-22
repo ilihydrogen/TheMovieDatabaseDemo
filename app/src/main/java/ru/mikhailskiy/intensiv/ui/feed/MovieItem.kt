@@ -1,11 +1,13 @@
 package ru.mikhailskiy.intensiv.ui.feed
 
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_with_text.*
 import ru.mikhailskiy.intensiv.R
 import ru.mikhailskiy.intensiv.data.Movie
 import ru.mikhailskiy.intensiv.extensions.loadByUrl
+import ru.mikhailskiy.intensiv.network.ImageUtils
 
 class MovieItem(
     private val content: Movie,
@@ -20,6 +22,6 @@ class MovieItem(
         viewHolder.content.setOnClickListener {
             onClick.invoke(content)
         }
-        viewHolder.image_preview.loadByUrl("https://m.media-amazon.com/images/M/MV5BYTk3MDljOWQtNGI2My00OTEzLTlhYjQtOTQ4ODM2MzUwY2IwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_.jpg")
+        viewHolder.image_preview.loadByUrl(ImageUtils.imageUrl(content.posterPath))
     }
 }

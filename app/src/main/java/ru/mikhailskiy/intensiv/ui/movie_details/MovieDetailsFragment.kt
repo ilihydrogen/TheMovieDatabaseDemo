@@ -1,30 +1,36 @@
 package ru.mikhailskiy.intensiv.ui.movie_details
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.movie_details_fragment.*
 import ru.mikhailskiy.intensiv.R
+import ru.mikhailskiy.intensiv.data.Genre
+import ru.mikhailskiy.intensiv.data.Movie
+import ru.mikhailskiy.intensiv.data.repository.MovieRepository
+import ru.mikhailskiy.intensiv.extensions.loadByUrl
+import ru.mikhailskiy.intensiv.extensions.toast
+import ru.mikhailskiy.intensiv.network.ImageUtils
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class MovieDetailsFragment : Fragment() {
 
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            movie = Gson().fromJson(it.getString("movie"), Movie::class.java)
         }
     }
 
@@ -39,23 +45,29 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        MovieRepository.movieDetails(
+            id = movie.id,
+            onResult = { this.movie = it; updateDetails() },
+            onError = { context?.toast(it) })
+        MovieRepository.movieCredits(
+            id = movie.id,
+            onResult = { this.movie.actors = it.cast; updateDetails() },
+            onError = { context?.toast(it) })
+
+        updateDetails()
+    }
+
+    private fun updateDetails() {
+        movie_title.text = movie.title
+        movie_description.text = movie.overview
+        movie_year.text = movie.year
+        movie_image.loadByUrl(ImageUtils.imageUrl(movie.posterPath))
+        movie_genre.text = movie.genres?.let { Genre.getGenresAsString(it) }
+        movie_studio.text = movie.production?.last()?.name
         movie_cast.adapter = GroupAdapter<GroupieViewHolder>().apply {
-            addAll(
-                listOf(
-                    CastItem(
-                        "Robert \"Bob\" Paulson",
-                        "https://avatars.yandex.net/get-music-content/3071110/7d4e99c1.p.5435146/200x200"
-                    ),
-                    CastItem(
-                        "Helena Bonham Carter",
-                        "https://avatars.yandex.net/get-music-content/3071110/7d4e99c1.p.5435146/200x200"
-                    ),
-                    CastItem(
-                        "Bread Pitt",
-                        "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/12/homemade-artisan-bread-600x900.jpg"
-                    )
-                )
-            )
+            movie.actors?.map {
+                CastItem(it.name, ImageUtils.imageUrl(it.profilePath ?: "#"))
+            }?.toList()?.let { addAll(it) }
         }
         movie_cast.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
     }

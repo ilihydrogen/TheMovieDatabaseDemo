@@ -20,5 +20,13 @@
     <dimen name="tv_show_card_height">160dp</dimen>
     <dimen name="tv_show_card_text_width">196dp</dimen>
 
+    <!--    Movie details-->
+    <dimen name="padding_32">32dp</dimen>
+    <dimen name="movie_details_poster_image_height">320dp</dimen>
+    <dimen name="hq_sign_size">16dp</dimen>
+    <dimen name="movie_watch_button_width">112dp</dimen>
+    <dimen name="movie_watch_button_height">42dp</dimen>
+    <dimen name="movie_details_table_title_width">100dp</dimen>
+
 
 </resources>

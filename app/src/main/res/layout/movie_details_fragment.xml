@@ -2,14 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blueDark"
-    android:orientation="vertical"
     tools:context="ru.mikhailskiy.intensiv.ui.movie_details.MovieDetailsFragment">
 
     <ImageView
         android:id="@+id/movie_image"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="@dimen/movie_details_poster_image_height"
         android:scaleType="centerCrop"
         android:src="@drawable/the_walking_dead" />
 
@@ -21,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="32dp">
+            android:padding="@dimen/padding_32">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -29,17 +27,16 @@
 
                 <TextView
                     android:id="@+id/movie_title"
+                    style="@style/MovieDetailsTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans"
-                    android:text="Aquaman"
-                    android:textColor="#ffffff"
-                    android:textSize="22sp" />
+                    android:textSize="22sp"
+                    tools:text="Aquaman" />
 
                 <ImageView
                     android:id="@+id/movie_in_high_quality"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="@dimen/hq_sign_size"
+                    android:layout_height="@dimen/hq_sign_size"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_hq" />
@@ -53,11 +50,11 @@
 
                 <Button
                     android:id="@+id/movie_watch"
-                    android:layout_width="112dp"
-                    android:layout_height="42dp"
+                    android:layout_width="@dimen/movie_watch_button_width"
+                    android:layout_height="@dimen/movie_watch_button_height"
                     android:background="@drawable/button_background"
                     android:text="Смотреть"
-                    android:textColor="#fff"
+                    android:textColor="@color/white"
                     android:textSize="12sp" />
 
                 <androidx.appcompat.widget.AppCompatRatingBar
@@ -78,16 +75,15 @@
 
             <TextView
                 android:id="@+id/movie_description"
+                style="@style/MovieDetailsTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/material_margin_normal"
                 android:alpha="0.6"
-                android:fontFamily="@font/opensans"
-                android:text="In 1985 Maine, lighthouse keeper Thomas Curry rescues Atlanna, the queen of the underwater nation of Atlantis, during a storm. They eventually fall in love and have a son named Arthur, who is born with the power to communicate with marine lifeforms."
                 android:textAlignment="viewStart"
-                android:textColor="#ffffff"
                 android:textSize="16sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                tools:text="In 1985 Maine, lighthouse keeper Thomas Curry rescues Atlanna, the queen of the underwater nation of Atlantis, during a storm. They eventually fall in love and have a son named Arthur, who is born with the power to communicate with marine lifeforms." />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_cast"
@@ -103,22 +99,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="100dp"
+                    style="@style/MovieDetailsTitleText"
+                    android:layout_width="@dimen/movie_details_table_title_width"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans"
                     android:text="@string/studio"
-                    android:textColor="#ffffff"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/movie_studio"
+                    style="@style/MovieDetailsTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.6"
-                    android:fontFamily="@font/opensans"
                     android:text="Test studio"
                     android:textAlignment="viewStart"
-                    android:textColor="#ffffff"
                     android:textSize="16sp"
                     android:textStyle="normal" />
 
@@ -131,24 +125,22 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="100dp"
+                    style="@style/MovieDetailsTitleText"
+                    android:layout_width="@dimen/movie_details_table_title_width"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans"
                     android:text="@string/genre"
-                    android:textColor="#ffffff"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/movie_genre"
+                    style="@style/MovieDetailsTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.6"
-                    android:fontFamily="@font/opensans"
-                    android:text="Test text"
                     android:textAlignment="viewStart"
-                    android:textColor="#ffffff"
                     android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    tools:text="Test text" />
 
             </LinearLayout>
 
@@ -159,22 +151,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="100dp"
+                    style="@style/MovieDetailsTitleText"
+                    android:layout_width="@dimen/movie_details_table_title_width"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans"
                     android:text="@string/year"
-                    android:textColor="#ffffff"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/movie_year"
+                    style="@style/MovieDetailsTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.6"
-                    android:fontFamily="@font/opensans"
                     android:text="2020"
                     android:textAlignment="viewStart"
-                    android:textColor="#ffffff"
                     android:textSize="16sp"
                     android:textStyle="normal" />
 
