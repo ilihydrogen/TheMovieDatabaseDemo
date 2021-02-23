@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.item_with_text.*
 import ru.mikhailskiy.intensiv.R
 import ru.mikhailskiy.intensiv.data.Movie
 import ru.mikhailskiy.intensiv.extensions.loadByUrl
+import ru.mikhailskiy.intensiv.network.ImageUtils
 
 class MovieItem(
     private val content: Movie,
@@ -20,6 +21,6 @@ class MovieItem(
         viewHolder.content.setOnClickListener {
             onClick.invoke(content)
         }
-        viewHolder.image_preview.loadByUrl(content.imageUrl)
+        viewHolder.image_preview.loadByUrl(ImageUtils.imageUrl(content.posterPath))
     }
 }

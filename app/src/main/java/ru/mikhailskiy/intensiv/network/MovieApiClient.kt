@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.mikhailskiy.Const.getEndpoint
+import ru.mikhailskiy.intensiv.BuildConfig
 import java.util.concurrent.TimeUnit
 
 object MovieApiClient {
@@ -31,7 +31,7 @@ object MovieApiClient {
             .addConverterFactory(
                 GsonConverterFactory.create()
             )
-            .baseUrl(getEndpoint())
+            .baseUrl(BuildConfig.THE_MOVIE_DATABASE_API_ENDPOINT)
             .build()
 
         return retrofit.create(MovieApiInterface::class.java)

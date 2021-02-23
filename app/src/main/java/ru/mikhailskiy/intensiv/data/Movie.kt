@@ -18,9 +18,6 @@ data class Movie(
     val rating: Float
         get() = voteAverage.div(2).toFloat()
 
-    val imageUrl: String
-        get() = "https://image.tmdb.org/t/p/w500$posterPath"
-
     val year: String
         get() = releaseDate.split("-").first()
 }

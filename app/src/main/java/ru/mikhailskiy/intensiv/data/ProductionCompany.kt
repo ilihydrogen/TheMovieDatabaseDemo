@@ -7,7 +7,4 @@ data class ProductionCompany(
     @SerializedName("id") val id: Int,
     @SerializedName("logo_path") val logo: String,
     @SerializedName("origin_country") val originCountry: String
-) {
-    val imageUrl: String
-        get() = "https://image.tmdb.org/t/p/w500$logo"
-}
+)

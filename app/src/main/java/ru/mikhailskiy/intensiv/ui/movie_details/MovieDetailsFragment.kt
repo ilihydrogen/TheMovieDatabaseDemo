@@ -17,6 +17,7 @@ import ru.mikhailskiy.intensiv.data.Movie
 import ru.mikhailskiy.intensiv.data.repository.MovieRepository
 import ru.mikhailskiy.intensiv.extensions.loadByUrl
 import ru.mikhailskiy.intensiv.extensions.toast
+import ru.mikhailskiy.intensiv.network.ImageUtils
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -59,11 +60,13 @@ class MovieDetailsFragment : Fragment() {
         movie_title.text = movie.title
         movie_description.text = movie.overview
         movie_year.text = movie.year
-        movie_image.loadByUrl(movie.imageUrl)
+        movie_image.loadByUrl(ImageUtils.imageUrl(movie.posterPath))
         movie_genre.text = movie.genres?.let { Genre.getGenresAsString(it) }
         movie_studio.text = movie.production?.last()?.name
         movie_cast.adapter = GroupAdapter<GroupieViewHolder>().apply {
-            movie.actors?.map { CastItem(it.name, it.imageUrl) }?.toList()?.let { addAll(it) }
+            movie.actors?.map {
+                CastItem(it.name, ImageUtils.imageUrl(it.profilePath ?: "#"))
+            }?.toList()?.let { addAll(it) }
         }
         movie_cast.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
     }
