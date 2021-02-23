@@ -1,5 +1,6 @@
 package ru.mikhailskiy.intensiv.ui.feed
 
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_with_text.*
