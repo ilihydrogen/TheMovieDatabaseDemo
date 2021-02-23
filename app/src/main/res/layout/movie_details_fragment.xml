@@ -2,14 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.mikhailskiy.intensiv.ui.movie_details.MovieDetailsFragment">
+    tools:context="ru.mikhailskiy.intensiv.ui.movie_details.MovieDetailsFragment"
+    android:orientation="vertical"
+    android:background="@color/details_screen_background"
+    >
 
     <ImageView
         android:id="@+id/movie_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/movie_details_poster_image_height"
-        android:scaleType="centerCrop"
-        android:src="@drawable/the_walking_dead" />
+        android:scaleType="centerCrop" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

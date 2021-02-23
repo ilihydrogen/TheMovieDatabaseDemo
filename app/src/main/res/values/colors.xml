@@ -23,6 +23,7 @@
     <color name="selectedControlIndicator">#D6182A</color>
 
     <color name="mainFeedBackground">@color/colorPrimary</color>
+    <color name="details_screen_background">#2c3848</color>
 
 
 </resources>
