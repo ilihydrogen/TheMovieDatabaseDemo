@@ -8,12 +8,13 @@ import ru.mikhailskiy.intensiv.data.Movie
 import ru.mikhailskiy.intensiv.extensions.loadByUrl
 import ru.mikhailskiy.intensiv.network.ImageUtils
 
-class TVShowItem(private val content: Movie) : Item() {
+class TVShowItem(private val content: Movie, private val onClick: ((movie: Movie) -> Unit)? = null) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.tv_show_title.text = content.title
         viewHolder.tv_show_rating.rating = content.rating
-        viewHolder.tv_show_image.loadByUrl(ImageUtils.imageUrl(content.posterPath))
+        viewHolder.tv_show_image.loadByUrl(ImageUtils.imageUrl(content.posterPath?: "#"))
+        viewHolder.itemView.setOnClickListener { onClick?.invoke(content) }
     }
 
     override fun getLayout(): Int {

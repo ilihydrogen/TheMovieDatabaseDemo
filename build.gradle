@@ -19,7 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://oss.jfrog.org/libs-snapshot" }
     }
 }
 
@@ -48,4 +48,10 @@ ext {
     groupieVersion ='2.8.0'
     retrofitVersion = "1.6.0"
     gsonVersion = "2.8.6"
+
+    // Circle image view
+    civVersion = "3.1.0"
+
+    // RxJava
+    rxJavaVersion = "3.0.0"
 }
