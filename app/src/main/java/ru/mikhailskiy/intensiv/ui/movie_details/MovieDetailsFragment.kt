@@ -60,9 +60,9 @@ class MovieDetailsFragment : Fragment() {
         movie_title.text = movie.title
         movie_description.text = movie.overview
         movie_year.text = movie.year
-        movie_image.loadByUrl(ImageUtils.imageUrl(movie.posterPath))
+        movie_image.loadByUrl(ImageUtils.imageUrl(movie.posterPath?: "#"))
         movie_genre.text = movie.genres?.let { Genre.getGenresAsString(it) }
-        movie_studio.text = movie.production?.last()?.name
+        movie_studio.text = if (!movie.production.isNullOrEmpty()) movie.production?.last()?.name else ""
         movie_cast.adapter = GroupAdapter<GroupieViewHolder>().apply {
             movie.actors?.map {
                 CastItem(it.name, ImageUtils.imageUrl(it.profilePath ?: "#"))

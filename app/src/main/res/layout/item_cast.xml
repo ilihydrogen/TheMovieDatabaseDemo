@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="128dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/material_margin_normal"
         android:alpha="0.6"
